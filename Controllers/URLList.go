@@ -7,6 +7,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func GetHomePage (c *gin.Context) {
+       c.HTML(
+             http.StatusOK,
+             "index.html",
+             gin.H{
+                 "title": "Home Page",
+             },
+       )
+}
+
 func GetAllUrlInfo(c *gin.Context) {
 
 	var urlstruct []Models.RedirectUrl
