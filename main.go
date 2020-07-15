@@ -8,11 +8,11 @@ package main
 
 import  (
      "fmt"
-//     "log"
+     "log"
 //     "github.com/nayaksamdeep/tinyurl/Config"
-//     "github.com/nayaksamdeep/contact-list-service/Models"
+     "github.com/nayaksamdeep/tinyurl/Models"
      "github.com/nayaksamdeep/tinyurl/Routes"
-//     "github.com/jinzhu/gorm"
+     "github.com/jinzhu/gorm"
      _"github.com/mattn/go-sqlite3"
 )
 
@@ -20,20 +20,18 @@ var err error
 
 func main() {
 
-/*
 	// Creating a connection to the database
 
-	Config.DB, err = gorm.Open("sqlite3", "./gorm.db")
+	Models.DB, err = gorm.Open("sqlite3", "./gorm.db")
 
 	if err != nil {
                 log.Fatal(err)
 	}
 
-	defer Config.DB.Close()
+	defer Models.DB.Close()
 
 	// run the migrations: todo struct
-	Config.DB.AutoMigrate(&Models.Contact{})
-*/
+	Models.DB.AutoMigrate(&Models.RedirectUrl{})
 
         fmt.Println("hi there! Welcome to Contact List Service\n");
 
