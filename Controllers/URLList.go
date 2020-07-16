@@ -44,7 +44,7 @@ func ConvertAUrl(c *gin.Context) {
                 fmt.Println("Request aborted with Status Not Found")
 	} else {
                 var id = fmt.Sprint(urlstruct.ID);
-                urlstr := "/v1?url=" +  urlstruct.Url + "&tinyurl=Here is your shortened URL: <font color=\"green\"> http://" + id  + "/" + urlstruct.Url + " </font>";
+                urlstr := "/v1?url=" +  urlstruct.Url + "&tinyurl=Here is your shortened URL: <font color=\"green\"> http://localhost:8080/v1/tinyurl/" + id  + " for the Input URL " + urlstruct.Url + " </font>";
                 c.Redirect(302, urlstr);
                 fmt.Println("Request processed with Status OK")
 	}
@@ -58,8 +58,11 @@ func RedirectAUrl(c *gin.Context) {
 		c.AbortWithStatus(http.StatusNotFound)
                 fmt.Println("Request aborted with Status Not Found")
 	} else {
-                fmt.Println("Request processed with Status OK")
-		c.JSON(http.StatusOK, urlstruct)
+                urlstr := "http://" +  string(urlstruct.Url)
+                fmt.Println("Request processed with Status OK for ", urlstr)
+//		c.JSON(http.StatusOK, urlstruct)
+                c.Redirect(http.StatusPermanentRedirect, urlstr)
+//                c.Redirect(302, urlstr)
 	}
 }
 

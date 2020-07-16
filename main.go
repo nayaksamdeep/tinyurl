@@ -22,7 +22,7 @@ func main() {
 
 	// Creating a connection to the database
 
-	Models.DB, err = gorm.Open("sqlite3", "./gorm.db")
+	Models.DB, err = gorm.Open("sqlite3", "./tinyurlgorm.db")
 
 	if err != nil {
                 log.Fatal(err)
