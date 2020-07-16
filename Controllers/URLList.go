@@ -53,6 +53,7 @@ func RedirectAUrl(c *gin.Context) {
 	} else {
                 fmt.Println("Request processed with Status OK")
 		c.JSON(http.StatusOK, urlstruct)
+		// c.Redirect(http.StatusPermanentRedirect, urlstruct.url)
 	}
 }
 
