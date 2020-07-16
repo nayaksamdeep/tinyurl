@@ -32,7 +32,6 @@ func GetAllUrlInfo(c *gin.Context) {
 }
 
 func ConvertAUrl(c *gin.Context) {
-        fmt.Println("params: ", c.Keys, c.FullPath());
 	var urlstruct Models.RedirectUrl
 	//val := c.BindJSON(&urlstruct)
         val := c.ShouldBindWith(&urlstruct, binding.FormPost);
@@ -44,7 +43,12 @@ func ConvertAUrl(c *gin.Context) {
                 fmt.Println("Request aborted with Status Not Found")
 	} else {
                 var id = fmt.Sprint(urlstruct.ID);
-                urlstr := "/v1?url=" +  urlstruct.Url + "&tinyurl=Here is your shortened URL: <font color=\"green\"> http://" + id  + "/" + urlstruct.Url + " </font>";
+                urlstruct.TinyUrl = "http://localhost:8080/v1/" + id + "/" + urlstruct.Url;
+                urlstr := "/v1?url=" +  urlstruct.Url + "&tinyurl=Here is your shortened URL: <font color=\"green\"> <a href=\"" + urlstruct.Url + "\" target=\"_blank\">" + urlstruct.TinyUrl + "</a></font>";
+	        err := Models.UpdateAUrl(&urlstruct, id)
+	        if err != nil {
+		    c.JSON(http.StatusNotFound, urlstruct)
+	        }
                 c.Redirect(302, urlstr);
                 fmt.Println("Request processed with Status OK")
 	}
