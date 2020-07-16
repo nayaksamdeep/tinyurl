@@ -9,7 +9,6 @@ package main
 import  (
      "fmt"
      "log"
-//     "github.com/nayaksamdeep/tinyurl/Config"
      "github.com/nayaksamdeep/tinyurl/Models"
      "github.com/nayaksamdeep/tinyurl/Routes"
      "github.com/jinzhu/gorm"
