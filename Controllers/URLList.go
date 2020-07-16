@@ -5,6 +5,7 @@ import (
         "fmt"
         "github.com/nayaksamdeep/tinyurl/Models"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 )
 
 func GetHomePage (c *gin.Context) {
@@ -31,14 +32,20 @@ func GetAllUrlInfo(c *gin.Context) {
 }
 
 func ConvertAUrl(c *gin.Context) {
+        fmt.Println("params: ", c.Keys, c.FullPath());
 	var urlstruct Models.RedirectUrl
-	c.BindJSON(&urlstruct)
+	//val := c.BindJSON(&urlstruct)
+        val := c.ShouldBindWith(&urlstruct, binding.FormPost);
+        fmt.Println("Binding: ", val);
 	err := Models.ConvertAUrl(&urlstruct)
 	if err != nil {
+                fmt.Println("Error: " , err);
 		c.AbortWithStatus(http.StatusNotFound)
                 fmt.Println("Request aborted with Status Not Found")
 	} else {
-		c.JSON(http.StatusOK, urlstruct)
+                var id = fmt.Sprint(urlstruct.ID);
+                urlstr := "/v1?url=" +  urlstruct.Url + "&tinyurl=Here is your shortened URL: <font color=\"green\"> http://" + id  + "/" + urlstruct.Url + " </font>";
+                c.Redirect(302, urlstr);
                 fmt.Println("Request processed with Status OK")
 	}
 }
@@ -53,7 +60,6 @@ func RedirectAUrl(c *gin.Context) {
 	} else {
                 fmt.Println("Request processed with Status OK")
 		c.JSON(http.StatusOK, urlstruct)
-		// c.Redirect(http.StatusPermanentRedirect, urlstruct.url)
 	}
 }
 

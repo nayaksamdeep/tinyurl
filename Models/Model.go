@@ -6,7 +6,7 @@ import (
 
 type RedirectUrl struct {
 	ID uint            `json:"id"`
-	Url string       `json:"url"`
+	Url string       `form:"url" json:"url" binding:"required"`
 	TinyUrl string `json:"tinyurl"`
 	//CreatedDate time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_date"`
 	//ExpiryDate time.Time `gorm:"default.CURRENT_TIMESTAMP" json:"expiry_date"`
