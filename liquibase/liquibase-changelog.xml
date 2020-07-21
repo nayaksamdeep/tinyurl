@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+  <changeSet author="kannanb" id="users_db_1.0.0">
+    <createTable tableName="users">
+      <column name="id" type="INT" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true" />
+      </column>
+      <column name="username" type="VARCHAR(100)">
+        <constraints nullable="false" unique="true" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="kannanb" id="users_db_1.0.1">
+    <createTable tableName="accounts">
+      <column name="id" type="INT" autoIncrement="true">
+        <constraints nullable="false" 
+                     primaryKey="true" />
+      </column>
+      <column name="owner_id" type="INT">
+        <constraints nullable="false" 
+                     references="users(id)"
+                     foreignKeyName="FK_accounts_users" />
+      </column>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>
