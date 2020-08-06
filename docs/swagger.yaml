@@ -1,0 +1,35 @@
+basePath: /api/v1
+info:
+  contact:
+    email: kannanbalu7@gmail.com
+    name: API Support
+  description: Swagger API for Golang Project Blueprint.
+  license:
+    name: MIT
+    url: https://github.com/MartinHeinz/go-project-blueprint/blob/master/LICENSE
+  termsOfService: http://swagger.io/terms/
+  title: Tinyservice Swagger API
+  version: "1.0"
+paths:
+  /:
+    get:
+      produces:
+      - text/html
+      responses:
+        "200": {}
+      summary: Retrieve Tinyservice home page
+  /ListURL:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200": {}
+      summary: Retrieve all the URLs (tiny and original)
+  /tinyurl/:id:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200": {}
+      summary: Redirects to the original URL based on the id provided
+swagger: "2.0"

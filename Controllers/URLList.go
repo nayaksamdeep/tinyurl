@@ -8,6 +8,11 @@ import (
 	"github.com/gin-gonic/gin/binding"
 )
 
+// GetUser godoc
+// @Summary Retrieve Tinyservice home page 
+// @Produce html
+// @Success 200 
+// @Router / [get]
 func GetHomePage (c *gin.Context) {
        c.HTML(
              http.StatusOK,
@@ -18,6 +23,11 @@ func GetHomePage (c *gin.Context) {
        )
 }
 
+// GetUser godoc
+// @Summary Retrieve all the URLs (tiny and original)
+// @Produce json
+// @Success 200 
+// @Router /ListURL [get]
 func GetAllUrlInfo(c *gin.Context) {
 
 	var urlstruct []Models.RedirectUrl
@@ -56,6 +66,11 @@ func ConvertAUrl(c *gin.Context) {
 	}
 }
 
+// GetUser godoc
+// @Summary Redirects to the original URL based on the id provided
+// @Produce json
+// @Success 200 
+// @Router /tinyurl/:id [get]
 func RedirectAUrl(c *gin.Context) {
 	var urlstruct Models.RedirectUrl
 	id := c.Params.ByName("id")
